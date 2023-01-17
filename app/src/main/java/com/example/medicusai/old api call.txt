@@ -1,0 +1,24 @@
+//        apiInterface.enqueue(object : Callback<List<Biomarker>> {
+//            override fun onResponse(
+//                call: Call<List<Biomarker>>,
+//                response: Response<List<Biomarker>>
+//            ) {
+//
+//                var list: List<Biomarker> = listOf()
+//
+//                if (response.body() != null) {
+//                    for (biomarker in response.body()!!) {
+//                        if (biomarker.date != null) {
+//                            list += biomarker
+//                        }
+//                    }
+//
+//                    recyclerAdapter.list = list
+//                    recyclerAdapter.notifyDataSetChanged()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<Biomarker>>, t: Throwable) {
+//                Log.e(TAG, "onFailure: " + t.message)
+//            }
+//        })
