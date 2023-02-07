@@ -18,23 +18,38 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
         }
 
     fun apiRequest() {
-        with(RetrofitInstance) {
-            getRetrofitInstance()
-                .create(ApiInterface::class.java)
-                .getAllBiomarker().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())//use incomplete instead
-                .subscribe({ Biomarkers ->
-                    var list: List<Biomarker> = listOf()
+        compositeDisposable.add( RetrofitInstance.getRetrofitInstance()
+            .create(ApiInterface::class.java)
+            .getAllBiomarker().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())//use incomplete instead
+            .subscribe({ Biomarkers ->
+                var list: List<Biomarker> = listOf()
 
-                    for (biomarker in Biomarkers) {
-                        if (biomarker.date != null)
-                            list += biomarker
-                    }
+                for (biomarker in Biomarkers) {
+                    if (biomarker.date != null)
+                        list += biomarker
+                }
 
-                    biomarkerList.postValue(list.toList())
-                }, { error ->
-                })
-        }
+                biomarkerList.postValue(list.toList())
+            }, { _ ->
+            }))
+//        with(RetrofitInstance) {
+//            getRetrofitInstance()
+//                .create(ApiInterface::class.java)
+//                .getAllBiomarker().subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())//use incomplete instead
+//                .subscribe({ Biomarkers ->
+//                    var list: List<Biomarker> = listOf()
+//
+//                    for (biomarker in Biomarkers) {
+//                        if (biomarker.date != null)
+//                            list += biomarker
+//                    }
+//
+//                    biomarkerList.postValue(list.toList())
+//                }, { error ->
+//                })
+//        }
     }
 
     companion object {

@@ -11,7 +11,9 @@ import javax.inject.Singleton
 import kotlin.reflect.KClass
 
 
-
+/*
+here insert each viewModel
+*/
 @Module
 abstract class ViewModelModule {
 
